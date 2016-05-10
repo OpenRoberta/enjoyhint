@@ -142,7 +142,7 @@ var EnjoyHint = function (_options) {
                                 return;
                                 break;
                             case 'custom':
-                                on(step_data.event, function () {
+                                $event_element.on(step_data.event, function () {
                                     current_step++;
                                     off(step_data.event);
                                     stepAction();
@@ -166,11 +166,15 @@ var EnjoyHint = function (_options) {
                         });
 
                     }
-                    var max_habarites = Math.max($element.outerWidth(), $element.outerHeight());
+                    var w = $element.outerWidth();
+                    var h = $element.outerHeight();                  
+                    if ($element[0].getBBox) {
+                        w = $element[0].getBBox().width;
+                        h = $element[0].getBBox().height;
+                    }
+                    var max_habarites = Math.max(w, h);
                     var radius = step_data.radius  || Math.round(max_habarites / 2) + 5;
                     var offset = $element.offset();
-                    var w = $element.outerWidth();
-                    var h = $element.outerHeight();
                     var shape_margin = (step_data.margin !== undefined) ? step_data.margin : 10;
                     var coords = {
                         x: offset.left + Math.round(w / 2) ,
