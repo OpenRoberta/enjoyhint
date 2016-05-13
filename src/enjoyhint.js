@@ -52,9 +52,9 @@ var EnjoyHint = function (_options) {
     that.clear = function(){
         //(Remove userClass and set default text)
         $(".enjoyhint_next_btn").removeClass(that.nextUserClass);
-        $(".enjoyhint_next_btn").text("Next");
+       // $(".enjoyhint_next_btn").text("Next");
         $(".enjoyhint_skip_btn").removeClass(that.skipUserClass);
-        $(".enjoyhint_skip_btn").text("Skip");
+       // $(".enjoyhint_skip_btn").text("Skip");
     }
 
     var $body = $('body');
@@ -67,6 +67,7 @@ var EnjoyHint = function (_options) {
             if (step_data.onBeforeStart && typeof step_data.onBeforeStart === 'function') {
                 step_data.onBeforeStart();
             }
+            step_data = data[current_step];
             var timeout = step_data.timeout || 0;
             setTimeout(function () {
                 if (!step_data.selector) {
@@ -119,13 +120,15 @@ var EnjoyHint = function (_options) {
 
                     if (step_data.nextButton){
                         $(".enjoyhint_next_btn").addClass(step_data.nextButton.className || "");
-                        $(".enjoyhint_next_btn").text(step_data.nextButton.text || "Next");
+                        if (step_data.nextButton.text)
+                            $(".enjoyhint_next_btn").text(step_data.nextButton.text);
                         that.nextUserClass = step_data.nextButton.className
                     }
 
                     if (step_data.skipButton){
                         $(".enjoyhint_skip_btn").addClass(step_data.skipButton.className || "");
-                        $(".enjoyhint_skip_btn").text(step_data.skipButton.text || "Skip");
+                        if (step_data.skipButton.text)
+                            $(".enjoyhint_skip_btn").text(step_data.skipButton.text);
                         that.skipUserClass = step_data.skipButton.className
                     }
 
@@ -134,7 +137,7 @@ var EnjoyHint = function (_options) {
                             case 'auto':
                                 $element[step_data.event]();
                                 switch (step_data.event) {
-                                    case 'click':
+                                    case 'click':that
                                         break;
                                 }
                                 current_step++;
@@ -248,6 +251,10 @@ var EnjoyHint = function (_options) {
 
     that.getCurrentStep = function () {
         return current_step;
+    };
+
+    that.setCurrentStepBack = function () {
+        current_step--;
     };
 
     that.trigger = function (event_name) {
