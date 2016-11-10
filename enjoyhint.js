@@ -302,6 +302,7 @@ var EnjoyHint = function (_options) {
     if (h < 2 * r) r = h / 2;
     this.beginPath();
     this.moveTo(x + r, y);
+    r = r > 0 ? r:0;
     this.arcTo(x + w, y, x + w, y + h, r);
     this.arcTo(x + w, y + h, x, y + h, r);
     this.arcTo(x, y + h, x, y, r);
@@ -436,7 +437,7 @@ var EnjoyHint = function (_options) {
 
                         var x = this.attrs.center_x - Math.round(this.attrs.width / 2);
                         var y = this.attrs.center_y - Math.round(this.attrs.height / 2);
-                        ctx.roundRect(x, y, this.attrs.width, this.attrs.height, this.attrs.radius);
+                        ctx.roundRect(x, y, this.attrs.width, this.attrs.height, Math.abs(this.attrs.radius));
                         ctx.fillStyle = "red";
                         ctx.fill();
 
@@ -769,7 +770,7 @@ var EnjoyHint = function (_options) {
                             var sides_pos = {
                                 top: data.center_y - half_h + shape_offsets.top,
                                 bottom: data.center_y + half_h - shape_offsets.bottom,
-                                left: data.center_x - half_w + shape_offsets.left,
+                                left: data.center_x - half_w - shape_offsets.left,
                                 right: data.center_x + half_w - shape_offsets.right
                             };
                             data.width = sides_pos.right - sides_pos.left;
@@ -812,12 +813,13 @@ var EnjoyHint = function (_options) {
 
                     var label_hor_side = (body_size.w - data.center_x) < data.center_x ? 'left' : 'right';
                     var label_ver_side = (body_size.h - data.center_y) < data.center_y ? 'top' : 'bottom';
-                    var label_shift = 150;
+                    var label_shift_width = -100;
+                    var label_shift_height = 150;
                     var label_margin = 40;
-                    var label_shift_with_label_width = label_shift + label_width + label_margin;
-                    var label_shift_with_label_height = label_shift + label_height + label_margin;
-                    var label_hor_offset = half_w + label_shift;
-                    var label_ver_offset = half_h + label_shift;
+                    var label_shift_with_label_width = label_shift_width + label_width + label_margin;
+                    var label_shift_with_label_height = label_shift_height + label_height + label_margin;
+                    var label_hor_offset = half_w + label_shift_width;
+                    var label_ver_offset = half_h + label_shift_height;
 
                     var label_x = (label_hor_side == 'left') ? data.center_x - label_hor_offset - label_width : data.center_x + label_hor_offset;
                     var label_y = (label_ver_side == 'top') ? data.center_y - label_ver_offset - label_height : data.center_y + label_ver_offset;
@@ -910,7 +912,7 @@ var EnjoyHint = function (_options) {
 
                     if (is_center) {
                         if (is_top) {
-                            setArrowData('bottom', 'top', 'top');
+                            setArrowData('left', 'top', 'top');
                         } else if (is_bottom) {
                             setArrowData('top', 'bottom', 'bottom');
                         } else {
@@ -928,7 +930,7 @@ var EnjoyHint = function (_options) {
                         sideStatements(
                             ['left', 'top', 'top'],//top
                             ['bottom', 'right', 'bottom'],//mid_top
-                            ['left', 'right', 'top'],//mid
+                            ['left', 'top', 'top'],//mid
                             ['top', 'right', 'top'],//mid_bot
                             ['left', 'bottom', 'bottom']//bot
                         );
