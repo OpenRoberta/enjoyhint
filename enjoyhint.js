@@ -813,12 +813,19 @@ var EnjoyHint = function (_options) {
 
                     var label_hor_side = (body_size.w - data.center_x) < data.center_x ? 'left' : 'right';
                     var label_ver_side = (body_size.h - data.center_y) < data.center_y ? 'top' : 'bottom';
-                    var label_shift_width = -100;
-                    var label_shift_height = 150;
+                    var label_shift_width = -205;
+                    var label_shift_height = 100;
                     var label_margin = 40;
-                    var label_shift_with_label_width = label_shift_width + label_width + label_margin;
+                    if (window.innerWidth < window.innerHeight){
+                    	var label_shift_with_label_width = label_shift_width + label_width + label_margin;
+                        var label_hor_offset = half_w + label_shift_width;
+                    }
+                    else{
+                        var label_shift_with_label_width = Math.abs(label_shift_width + label_width + label_margin);
+                        var label_hor_offset = Math.abs(half_w + label_shift_width);
+                    }
+                
                     var label_shift_with_label_height = label_shift_height + label_height + label_margin;
-                    var label_hor_offset = half_w + label_shift_width;
                     var label_ver_offset = half_h + label_shift_height;
 
                     var label_x = (label_hor_side == 'left') ? data.center_x - label_hor_offset - label_width : data.center_x + label_hor_offset;
@@ -912,7 +919,7 @@ var EnjoyHint = function (_options) {
 
                     if (is_center) {
                         if (is_top) {
-                            setArrowData('left', 'top', 'top');
+                            setArrowData('bottom', 'top', 'top');
                         } else if (is_bottom) {
                             setArrowData('top', 'bottom', 'bottom');
                         } else {
@@ -921,7 +928,7 @@ var EnjoyHint = function (_options) {
                     } else if (is_left) {
                         sideStatements(
                             ['right', 'top', 'top'],//top
-                            ['bottom', 'left', 'bottom'],//mid_top
+                            ['left', 'left', 'bottom'],//mid_top
                             ['right', 'left', 'top'],//mid
                             ['top', 'left', 'top'],//mid_bot
                             ['right', 'bottom', 'bottom']//bot
@@ -930,7 +937,7 @@ var EnjoyHint = function (_options) {
                         sideStatements(
                             ['left', 'top', 'top'],//top
                             ['bottom', 'right', 'bottom'],//mid_top
-                            ['left', 'top', 'top'],//mid
+                            ['left', 'right', 'top'],//mid
                             ['top', 'right', 'top'],//mid_bot
                             ['left', 'bottom', 'bottom']//bot
                         );
