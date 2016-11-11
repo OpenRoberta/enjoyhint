@@ -310,7 +310,7 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
                     var label_h = label.height();
                     var label_left = label.offset().left;
                     var label_right = label.offset().left + label_w;
-                    var label_top = label.offset().top - $(document).scrollTop();;
+                    var label_top = label.offset().top - $(document).scrollTop();
                     var label_bottom = label.offset().top + label_h;
 
                     var margin = 10;
@@ -467,7 +467,7 @@ CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
                             half_w = Math.round(data.width / 2);
                             half_h = Math.round(data.height / 2);
 
-                            var sides_pos = {
+                            sides_pos = {
                                 top: data.center_y - half_h + shape_offsets.top,
                                 bottom: data.center_y + half_h - shape_offsets.bottom,
                                 left: data.center_x - half_w + shape_offsets.left,

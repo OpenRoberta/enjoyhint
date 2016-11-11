@@ -55,7 +55,7 @@ var EnjoyHint = function (_options) {
        // $(".enjoyhint_next_btn").text("Next");
         $(".enjoyhint_skip_btn").removeClass(that.skipUserClass);
        // $(".enjoyhint_skip_btn").text("Skip");
-    }
+    };
 
     var $body = $('body');
 
@@ -105,15 +105,15 @@ var EnjoyHint = function (_options) {
                             }
                         });
                     }
-                    if (step_data.showNext == true){
+                    if (step_data.showNext === true){
                         $body.enjoyhint('show_next');
                     }
-                    if (step_data.showSkip == false){
+                    if (step_data.showSkip === false){
                         $body.enjoyhint('hide_skip');
                     }else{
                         $body.enjoyhint('show_skip');
                     }
-                    if (step_data.showSkip == true){
+                    if (step_data.showSkip === true){
 
                     }
 
@@ -122,14 +122,14 @@ var EnjoyHint = function (_options) {
                         $(".enjoyhint_next_btn").addClass(step_data.nextButton.className || "");
                         if (step_data.nextButton.text)
                             $(".enjoyhint_next_btn").text(step_data.nextButton.text);
-                        that.nextUserClass = step_data.nextButton.className
+                        that.nextUserClass = step_data.nextButton.className;
                     }
 
                     if (step_data.skipButton){
                         $(".enjoyhint_skip_btn").addClass(step_data.skipButton.className || "");
                         if (step_data.skipButton.text)
                             $(".enjoyhint_skip_btn").text(step_data.skipButton.text);
-                        that.skipUserClass = step_data.skipButton.className
+                        that.skipUserClass = step_data.skipButton.className;
                     }
 
                     if (step_data.event_type) {
@@ -137,13 +137,12 @@ var EnjoyHint = function (_options) {
                             case 'auto':
                                 $element[step_data.event]();
                                 switch (step_data.event) {
-                                    case 'click':that
+                                    case 'click':
                                         break;
                                 }
                                 current_step++;
                                 stepAction();
                                 return;
-                                break;
                             case 'custom':
                                 $event_element.on(step_data.event, function () {
                                     current_step++;
@@ -261,13 +260,13 @@ var EnjoyHint = function (_options) {
         switch (event_name) {
             case 'next':
                 nextStep();
-                break
+                break;
             case 'skip':
                 skipAll();
-                break
+                break;
             default:
                 nextStep();
-                break
+                break;
         }
     };
 
