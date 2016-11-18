@@ -813,16 +813,22 @@ var EnjoyHint = function (_options) {
 
                     var label_hor_side = (body_size.w - data.center_x) < data.center_x ? 'left' : 'right';
                     var label_ver_side = (body_size.h - data.center_y) < data.center_y ? 'top' : 'bottom';
-                    var label_shift_width = -205;
+                    var label_shift_width = -210;
                     var label_shift_height = 100;
                     var label_margin = 40;
-                    if (window.innerWidth < window.innerHeight){
-                    	var label_shift_with_label_width = label_shift_width + label_width + label_margin;
-                        var label_hor_offset = half_w + label_shift_width;
+                    if (window.innerWidth < 1.4*window.innerHeight){
+                    	label_shift_width = -100;
+                    	var label_shift_with_label_width = Math.abs(label_shift_width + label_width + label_margin);
+                        var label_hor_offset = Math.abs(half_w + label_shift_width);
                     }
+                    //else if (window.innerWidth < 1.5*window.innerHeight){
+                    //	label_shift_width = -100;
+                    //	var label_shift_with_label_width =  label_shift_width + label_width + label_margin;
+                    //  var label_hor_offset =  -0.1*window.innerWidth;
+                    //}
                     else{
                         var label_shift_with_label_width = Math.abs(label_shift_width + label_width + label_margin);
-                        var label_hor_offset = Math.abs(half_w + label_shift_width);
+                        var label_hor_offset =  Math.abs(half_w + label_shift_width);
                     }
                 
                     var label_shift_with_label_height = label_shift_height + label_height + label_margin;
