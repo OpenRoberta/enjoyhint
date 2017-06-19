@@ -75,9 +75,9 @@ var EnjoyHint = function (_options) {
         var $skipBtn = $('.enjoyhint_skip_btn');
 
         $nextBtn.removeClass(that.nextUserClass);
-        $nextBtn.text("Next");
+        //$nextBtn.text("Next");
         $skipBtn.removeClass(that.skipUserClass);
-        $skipBtn.text("Skip");
+        //$skipBtn.text("Skip");
     };
 
     var stepAction = function () {
@@ -104,7 +104,7 @@ var EnjoyHint = function (_options) {
 
             step_data.onBeforeStart();
         }
-
+        step_data = data[current_step];
         var timeout = step_data.timeout || 0;
 
         setTimeout(function () {
@@ -183,7 +183,8 @@ var EnjoyHint = function (_options) {
                     var $nextBtn = $('.enjoyhint_next_btn');
 
                     $nextBtn.addClass(step_data.nextButton.className || "");
-                    $nextBtn.text(step_data.nextButton.text || "Next");
+                    if (step_data.nextButton.text)
+                        $nextBtn.text(step_data.nextButton.text);
                     that.nextUserClass = step_data.nextButton.className;
                 }
 
@@ -192,7 +193,8 @@ var EnjoyHint = function (_options) {
                     var $skipBtn = $('.enjoyhint_skip_btn');
 
                     $skipBtn.addClass(step_data.skipButton.className || "");
-                    $skipBtn.text(step_data.skipButton.text || "Skip");
+                    if (step_data.nextButton.text)
+                        $skipBtn.text(step_data.skipButton.text);
                     that.skipUserClass = step_data.skipButton.className;
                 }
 
@@ -206,7 +208,7 @@ var EnjoyHint = function (_options) {
 
                             switch (step_data.event) {
 
-                                case 'click':
+                                case 'click': that
                                     break;
                             }
 
@@ -366,6 +368,10 @@ var EnjoyHint = function (_options) {
         return current_step;
     };
 
+    that.setCurrentStepBack = function () {
+        current_step--;
+    };
+    
     that.trigger = function (event_name) {
 
         switch (event_name) {
