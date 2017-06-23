@@ -83,7 +83,6 @@ var EnjoyHint = function (_options) {
     var stepAction = function () {
 
         if (!(data && data[current_step])) {
-
             $body.enjoyhint('hide');
             options.onEnd();
             destroyEnjoy();
@@ -208,7 +207,7 @@ var EnjoyHint = function (_options) {
 
                             switch (step_data.event) {
 
-                                case 'click': that
+                            case 'click':that
                                     break;
                             }
 
@@ -219,14 +218,11 @@ var EnjoyHint = function (_options) {
                             break;
 
                         case 'custom':
-
-                            on(step_data.event, function () {
-
+                            $event_element.on(step_data.event, function () {
                                 current_step++;
                                 off(step_data.event);
                                 stepAction();
                             });
-
                             break;
 
                         case 'next':
@@ -251,11 +247,15 @@ var EnjoyHint = function (_options) {
                     });
                 }
 
+                var w = $element.outerWidth();
+                var h = $element.outerHeight();
+                if ($element[0].getBBox) {
+                    w = $element[0].getBBox().width;
+                    h = $element[0].getBBox().height;
+                }                
                 var max_habarites = Math.max($element.outerWidth(), $element.outerHeight());
                 var radius = step_data.radius || Math.round(max_habarites / 2) + 5;
                 var offset = $element.offset();
-                var w = $element.outerWidth();
-                var h = $element.outerHeight();
                 var shape_margin = (step_data.margin !== undefined) ? step_data.margin : 10;
 
                 var coords = {
@@ -377,21 +377,17 @@ var EnjoyHint = function (_options) {
         switch (event_name) {
 
             case 'next':
-
                 nextStep();
                 break;
 
             case 'skip':
-
                 skipAll();
                 break;
         }
     };
 
     that.setScript = function (_data) {
-
         if (_data) {
-
             data = _data;
         }
     };
