@@ -252,7 +252,7 @@ var EnjoyHint = function (_options) {
                 if ($element[0].getBBox) {
                     w = $element[0].getBBox().width;
                     h = $element[0].getBBox().height;
-                }                
+                }
                 var max_habarites = Math.max($element.outerWidth(), $element.outerHeight());
                 var radius = step_data.radius || Math.round(max_habarites / 2) + 5;
                 var offset = $element.offset();
@@ -371,7 +371,7 @@ var EnjoyHint = function (_options) {
     that.setCurrentStepBack = function () {
         current_step--;
     };
-    
+
     that.trigger = function (event_name) {
 
         switch (event_name) {
@@ -419,10 +419,10 @@ var EnjoyHint = function (_options) {
 };;CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
 
     if (w < 2 * r) r = w / 2;
-    if (h < 2 * r) r = h / 2;
+    if (h < 2 * r) r = Math.abs(h) / 2;
     this.beginPath();
     this.moveTo(x + r, y);
-    this.arcTo(x + w, y, x + w, y + h, r);
+    this.arcTo(x + w , y, x + w, y + h, r);
     this.arcTo(x + w, y + h, x, y + h, r);
     this.arcTo(x, y + h, x, y, r);
     this.arcTo(x, y, x + w, y, r);
@@ -618,7 +618,6 @@ var EnjoyHint = function (_options) {
                         var def_comp = ctx.globalCompositeOperation;
                         ctx.globalCompositeOperation = 'destination-out';
                         ctx.beginPath();
-
                         var x = this.attrs.center_x - Math.round(this.attrs.width / 2);
                         var y = this.attrs.center_y - Math.round(this.attrs.height / 2);
                         ctx.roundRect(x, y, this.attrs.width, this.attrs.height, this.attrs.radius);
@@ -1266,15 +1265,23 @@ var EnjoyHint = function (_options) {
                         label_y = data.center_y + label_margin;
                     }
 
-                    if (window.innerWidth <= 640) {
-
+                    if(label_height > label_y){
+                      var label_data = that.renderLabel({
+                          x: label_x - window.innerHeight/3,
+                          y: label_y + window.innerHeight/4,
+                          text: data.text
+                      });
+                    }
+                    else{
+                      var label_data = that.renderLabel({
+                          x: label_x,
+                          y: label_y,
+                          text: data.text
+                      });
                     }
 
-                    var label_data = that.renderLabel({
-                        x: label_x,
-                        y: label_y,
-                        text: data.text
-                    });
+
+
 
                     that.$next_btn.css({
                         left: label_x,
