@@ -379,9 +379,11 @@ var EnjoyHint = function (_options) {
             case 'next':
                 nextStep();
                 break;
-
             case 'skip':
                 skipAll();
+                break;
+            default:
+                nextStep();
                 break;
         }
     };
