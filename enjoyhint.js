@@ -1267,27 +1267,17 @@ var EnjoyHint = function (_options) {
                         label_y = data.center_y + label_margin;
                     }
 
-                    if(label_height > label_y){
-                      var label_data = that.renderLabel({
-                          x: label_x - window.innerHeight/3,
-                          y: label_y + window.innerHeight/4,
-                          text: data.text
-                      });
-                    }
-                    else{
-                      var label_data = that.renderLabel({
-                          x: label_x,
-                          y: label_y,
-                          text: data.text
-                      });
-                    }
 
-
-
-
+                  var label_data = that.renderLabel({
+                      x: label_x,
+                      y: label_y,
+                      text: data.text
+                  });
+                                        
+                    
                     that.$next_btn.css({
                         left: label_x,
-                        top: label_y + label_height + 20
+                        top: label_y + label_height
                     });
 
                     var left_skip = label_x + that.$next_btn.width() + 10;
