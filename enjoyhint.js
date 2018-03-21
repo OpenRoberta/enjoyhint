@@ -1277,7 +1277,7 @@ var EnjoyHint = function (_options) {
                     
                     that.$next_btn.css({
                         left: label_x,
-                        top: label_y + label_height
+                        top: label_y + label_height + 20
                     });
 
                     var left_skip = label_x + that.$next_btn.width() + 10;
